@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class User extends Migration
+class Transaksi extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class User extends Migration
      */
     public function up()
     {
-        Schema::create('user', function (Blueprint $table) {
-
-            $table->string('username')->primary();
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('role');
-            $table->rememberToken();
+        Schema::create('transaksi', function (Blueprint $table) {
+            $table->id();
+            $table->string('date');
+            $table->string('username');
+            $table->foreign('username')->references('username')->on('user')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class User extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user');
+        Schema::dropIfExists('transaksi');
     }
 }
