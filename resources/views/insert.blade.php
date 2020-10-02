@@ -1,6 +1,6 @@
 @extends('main_layout')
 @section('nav_bar')
-<li class="nav-item mr-5">
+<li class="nav-item active mr-5">
     <a class="nav-link" href="#">Insert<span class="sr-only">(current)</span></a>
 </li>
 <li class="nav-item mr-5">
@@ -12,7 +12,7 @@
 @endsection
 @section('nav_bar_right')
 <li class="nav-item mr-5">
-    <a class="btn btn-warning" href="#" role="button">Check out</a>
+    <a class="btn btn-light" href="#" role="button">Check out</a>
 </li>
 <li class="nav-item mr-5">
     <a class="nav-link" href="#">Verification</a>
@@ -25,5 +25,5 @@
 </li>
 @endsection
 @section('body')
-datastock adalah good game
+Insert
 @endsection
