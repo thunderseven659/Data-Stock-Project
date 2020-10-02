@@ -1,3 +1,5 @@
+@extends('main_layout')
+@section('body')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +9,7 @@
     <title>Document</title>
 </head>
 <body>
-    test
-    {{$username}}
+
 </body>
 </html>
+@endsection

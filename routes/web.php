@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\Controller_login;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('login');
-})-> name('login');
+//Route::get('/', 'Controller_login@show')->name('login');
+//Route::post('/', 'Controller_login@login')->name('main');
+Route::get('/', 'Controller_login@login')->name('login');
+Route::get('/register','Controller_register@show')->name('register');
+Route::post('/register', 'Controller_register@insert')->name('insertRegister');
 
-Route::get('/register', function () {
-    return view('register');
-})-> name('register');
+
+

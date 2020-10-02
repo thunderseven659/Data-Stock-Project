@@ -6,7 +6,8 @@
 
         </div>
         <div class="title">Login</div>
-        <form action="welcome" method="POST">
+        <form action="{{route('main')}}" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="FullForm">
                 <div class="Form">
                     <div class="username">

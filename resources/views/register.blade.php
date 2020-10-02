@@ -7,7 +7,22 @@
 
     </div>
     <div class="title">Register</div>
-    <form action="welcome" method="POST">
+    <div class="error">
+
+        @if ($errors->any())
+        <ul>
+
+            @foreach ($errors->all() as $item)
+                <li>
+                    {{$item}}
+                </li>
+            @endforeach
+        </ul>
+        @endif
+
+    </div>
+<form action="{{route('insertRegister')}}" method="POST" enctype="multipart/form-data">
+    @csrf
         <div class="FullForm">
             <div class="Form">
                 <div class="username">
@@ -23,8 +38,8 @@
                     <input type="password" placeholder="Enter password" name="password" required>
                 </div>
                 <div class="re-password">
-                    <label for="re-password"><b>re-type Password :</b></label>
-                    <input type="password" placeholder="Enter password" name="re-password" required>
+                    <label for="password_confirmation"><b>re-type Password :</b></label>
+                    <input type="password" placeholder="Enter password" name="password_confirmation" required>
                 </div>
 
             </div>
