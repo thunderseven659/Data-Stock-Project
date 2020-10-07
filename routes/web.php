@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'Controller_login@login')->name('login');
 Route::get('/register','Controller_register@show')->name('register');
 Route::post('/register', 'Controller_register@insert')->name('insertRegister');
-
-
-
+Route::get('/insert','Controller_insert@show')->name('insertData');
+Route::get('/updateDelete','Controller_updateDelete@show')->name('updateDelete');
+Route::get('/read','Controller_read@show')->name('read');
+Route::get('/verification','Controller_verification@show')->name('verification');
