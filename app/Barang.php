@@ -22,4 +22,25 @@ class Barang extends Model
         static function getBarang(){
             return Barang::all(['id','name','description','price','stock']);
         }
+        static function reduceStock($id, $stock){
+            $barang= Barang::where('id',$id)->first();
+            if($barang->stock-$stock>=0){
+                $barang->stock-=$stock;
+                $barang->save();
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        static function checkStock($id, $stock){
+            $barang= Barang::where('id',$id)->first();
+            if($barang->stock-$stock<0){
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
 }

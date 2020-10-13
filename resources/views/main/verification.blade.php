@@ -20,5 +20,5 @@
 
 @endsection
 @section('body')
-Verification
+
 @endsection

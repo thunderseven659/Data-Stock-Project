@@ -20,6 +20,16 @@
 
 @endsection
 @section('body')
+@if(Session::has('success'))
+<div class="alert alert-success">
+    {{Session::get('success')}}
+</div>
+@endif
+@if(Session::has('error'))
+<div class="alert alert-danger">
+    {{Session::get('error')}}
+</div>
+@endif
     <div class="container-fluid">
         <div class="row d-flex justify-content-center align-items-center" style="height: 90vh">
 
@@ -54,7 +64,8 @@
 
             </div>
             <div class="col-xl-4" id="table1">
-                <form method="post" enctype="multipart/form-data">
+            <form action={{route('InsertTransaction')}} id=form_checkout method="post" enctype="multipart/form-data">
+                    @csrf
                     <table class="table" id="tableRight">
                         <thead>
                             <tr>
@@ -70,7 +81,16 @@
 
                         </tbody>
                     </table>
-                    @csrf
+                    <div class="form-group mt-5">
+                        <label>Nama Penerima :</label>
+                        <input type="text" class="form-control  @error('nama_penerima') is-invalid @enderror" name="nama_penerima">
+                        @error('nama_penerima')
+                        <span class="invalid-feedback" role="alert">
+                            {{ $message }}
+                        </span>
+                        @enderror
+                    </div>
+                    <button type="submit" class="btn btn-info btn-block ">Checkout</button>
                 </form>
 
             </div>
@@ -91,7 +111,7 @@
 
         function addtoCart(id, name, description, price) {
             var kosong = '<tr><td>' + id + '</td><td>' + name + '</td><td>' + description + '</td><td>' + price +
-                '</td><td> <input type="text" class="form-control" name="stock"></td> <td><button onclick="deleteRow(this)">remove</button></td></tr>';
+                '</td><td> <input type="text" class="form-control" name="stock[]"></td> <td><button onclick="deleteRow(this,'+id+')">remove</button></td></tr>';
 
             let z = x.length;
             x.push(id);
@@ -100,11 +120,19 @@
             });
             let y = x.length;
             if (z < y) {
+
                 document.getElementById("tableBodyRight").innerHTML += kosong;
+                var checkout='<input name="id[]" type="hidden" value='+id+'>';
+                document.getElementById("form_checkout").innerHTML += checkout;
             }
         }
 
-        function deleteRow(r) {
+        function deleteRow(r,id) {
+
+            var index = x.indexOf(id);
+        if (index >= 0) {
+         x.splice( index, 1 );
+            }
             var i = r.parentNode.parentNode.rowIndex;
             document.getElementById("tableRight").deleteRow(i);
         }

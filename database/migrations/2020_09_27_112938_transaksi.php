@@ -15,10 +15,11 @@ class Transaksi extends Migration
     {
         Schema::create('transaksi', function (Blueprint $table) {
             $table->id();
-            $table->string('date');
+            $table->date('date');
+            $table->string('nama_penerima');
             $table->string('username');
             $table->foreign('username')->references('username')->on('user')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('resi_id');
+            $table->string('resi_id')->nullable();
             $table->foreign('resi_id')->references('resi_id')->on('resi')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

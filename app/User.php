@@ -11,6 +11,7 @@ class User extends Authenticatable
     protected $primaryKey= 'username';
     protected $fillable= ['username','email','password','role'];
     protected $hidden=['password','remember_token'];
+    public $incrementing= false;
     static function insert($username, $email, $password)
     {
         User::create([

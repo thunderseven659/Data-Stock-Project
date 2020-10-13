@@ -27,6 +27,9 @@ Route::group(['middleware' => 'loginlogout'], function () {
     Route::get('/updateDelete','Controller_updateDelete@show')->name('updateDelete');
      Route::get('/read','Controller_read@show')->name('read');
     Route::get('/verification','Controller_verification@show')->name('verification');
+    Route::post('/read','Controller_read@insertTransaction')->name('InsertTransaction');
+
+
 });
 Route::group(['middleware' => 'logoutlogin'], function () {
     Route::post('/login', 'Controller_login@login')->name('main');
