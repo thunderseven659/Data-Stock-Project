@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
-
-class User extends Model
+use Illuminate\Foundation\Auth\User as Authenticatable;
+class User extends Authenticatable
 {
     protected $table= 'user';
     protected $primaryKey= 'username';
@@ -20,4 +20,5 @@ class User extends Model
             'role'=> 'member'
         ]);
     }
+
 }

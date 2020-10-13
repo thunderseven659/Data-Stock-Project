@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class Controller_register extends Controller
 {
     function show(){
-        return view('register');
+        return view('login.register');
     }
     function insert(Request $request)
     {
@@ -26,7 +26,7 @@ class Controller_register extends Controller
         ];
         $message = [
             'required'=> ':attribute is required',
-            'unique'=>':attribute must be unique',
+            'unique'=>':attribute is already used',
             'email'=>':attribute must be a proper email',
             'min'=>':attribute minimal length is :min',
             'confirmed'=>':attribute does not match'

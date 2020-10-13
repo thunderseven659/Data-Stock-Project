@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Sepatu extends Migration
+class Barang extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class Sepatu extends Migration
      */
     public function up()
     {
-        Schema::create('sepatu', function (Blueprint $table) {
+        Schema::create('barang', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
             $table->string('description');
             $table->integer('price');
+            $table->integer('stock');
             $table->string('image');
             $table->timestamps();
         });
@@ -30,6 +31,6 @@ class Sepatu extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sepatu');
+        Schema::dropIfExists('barang');
     }
 }

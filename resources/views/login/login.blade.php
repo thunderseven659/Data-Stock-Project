@@ -1,38 +1,49 @@
-@extends('layout')
+@extends('layout.layout')
+@section('nav_bar_right')
+
+<li class="nav-item active mr-5">
+    <a href="{{route('login')}}" class="nav-link" href="#">Login<span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item mr-5">
+<a href="{{route('register')}}" class="nav-link" href="#">Register</a>
+</li>
+
+@endsection
 @section('body')
- <div class="body">
-        <div class="background">
 
-
+ <div class="container d-flex justify-content-center align-items-center" style="min-height: 90vh">
+    <div class="card w-75">
+        <div class="card-header">
+          Login
         </div>
-        <div class="title">Login</div>
-        <form action="{{route('main')}}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="FullForm">
-                <div class="Form">
-                    <div class="username">
-                        <label for="username"><b>Username :</b></label>
-                        <input type="text" placeholder="Enter username" name="username" required>
-                    </div>
-                    <div class="password">
-                        <label for="password"><b>Password :</b></label>
-                        <input type="password" placeholder="Enter password" name="password" required>
-                    </div>
+        <div class="card-body">
+            <form action="{{route('main')}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group mb-5">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input type="email" class="form-control" name="email" aria-describedby="emailHelp">
                 </div>
-                <div class="Button">
-                    <div class="Remember">
-                        <label>
-                            <input type="checkbox" checked="checked" name="remember"> Remember Me!
-                        </label>
-                    </div>
-                    <div class="Login">
-                        <button type="submit">Login</button>
-                    </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input type="password" class="form-control" name="password">
                 </div>
-            </div>
-        </form>
-    </div>
-    <div class="footer">
+                <div class="form-group form-check mb-5">
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                  <label class="form-check-label" for="exampleCheck1">Remember me!</label>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mb-5">Submit</button>
+              </form>
+              <div class="error text-center">
 
-    </div>
+                @if (Session::has("error"))
+                <div class="alert alert-danger" role="alert">
+                    {{Session::get("error")}}
+                  </div>
+
+                @endif
+            </div>
+        </div>
+      </div>
+</div>
+
 @endsection

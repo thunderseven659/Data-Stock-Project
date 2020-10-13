@@ -18,6 +18,8 @@ class Transaksi extends Migration
             $table->string('date');
             $table->string('username');
             $table->foreign('username')->references('username')->on('user')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('resi_id');
+            $table->foreign('resi_id')->references('resi_id')->on('resi')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

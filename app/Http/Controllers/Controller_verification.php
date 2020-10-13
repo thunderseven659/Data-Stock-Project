@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class Controller_verification extends Controller
 {
     function show(){
-        return view('verification');
+        return view('main.verification');
     }
 }

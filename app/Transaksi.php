@@ -8,5 +8,5 @@ class Transaksi extends Model
 {
     protected $table='transaksi';
     protected $primarykey='id';
-    protected $fillable=['date','username'];
+    protected $fillable=['date','username','resiId'];
 }

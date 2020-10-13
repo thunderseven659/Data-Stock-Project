@@ -1,53 +1,71 @@
-@extends('layout')
+@extends('layout.layout')
+@section('nav_bar_right')
 
+<li class="nav-item  mr-5">
+    <a href="{{route('login')}}" class="nav-link" href="#">Login<span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item active mr-5">
+<a href="{{route('register')}}" class="nav-link" href="#">Register</a>
+</li>
+
+@endsection
 @section('body')
 <div class="body">
     <div class="background">
 
 
     </div>
-    <div class="title">Register</div>
-    <div class="error">
 
-        @if ($errors->any())
-        <ul>
-
-            @foreach ($errors->all() as $item)
-                <li>
-                    {{$item}}
-                </li>
-            @endforeach
-        </ul>
-        @endif
-
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 90vh">
+        <div class="card w-75">
+            <div class="card-header">
+            Register
+            </div>
+            <div class="card-body">
+                <form action="{{route('insertRegister')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Username</label>
+                      <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" required aria-describedby="emailHelp">
+                        @error('username')
+                            <span class="invalid-feedback" role="alert">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                      <label>Email</label>
+                      <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" required>
+                      @error('email')
+                      <span class="invalid-feedback" role="alert">
+                          {{ $message }}
+                      </span>
+                  @enderror
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
+                        @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                    </div>
+                    <div class="form-group mb-5">
+                        <label>Re-type Password</label>
+                        <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" required>
+                        @error('password_confirmation')
+                        <span class="invalid-feedback" role="alert">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Submit</button>
+                  </form>
+            </div>
+          </div>
     </div>
-<form action="{{route('insertRegister')}}" method="POST" enctype="multipart/form-data">
-    @csrf
-        <div class="FullForm">
-            <div class="Form">
-                <div class="username">
-                    <label for="username"><b>Username :</b></label>
-                    <input type="text" placeholder="Enter username" name="username" required>
-                </div>
-                <div class="email">
-                    <label for="email"><b>Email :</b></label>
-                    <input type="text" placeholder="Enter valid Email" name="email" required>
-                </div>
-                <div class="password">
-                    <label for="password"><b>Password :</b></label>
-                    <input type="password" placeholder="Enter password" name="password" required>
-                </div>
-                <div class="re-password">
-                    <label for="password_confirmation"><b>re-type Password :</b></label>
-                    <input type="password" placeholder="Enter password" name="password_confirmation" required>
-                </div>
 
-            </div>
-            <div class="Button">
-                    <button type="submit">Register</button>
-            </div>
-        </div>
-    </form>
 </div>
 <div class="footer">
 

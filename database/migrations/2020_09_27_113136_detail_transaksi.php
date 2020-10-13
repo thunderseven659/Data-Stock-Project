@@ -14,7 +14,8 @@ class DetailTransaksi extends Migration
     public function up()
     {
         Schema::create('detail_transaksi', function (Blueprint $table) {
-            $table->foreignId('id_sepatu')->references('id')->on('sepatu')->onUpdate('cascade')->onDelete('cascade');
+
+            $table->foreignId('id_barang')->references('id')->on('barang')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('id_transaksi')->references('id')->on('transaksi')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('quantity');
             $table->timestamps();
