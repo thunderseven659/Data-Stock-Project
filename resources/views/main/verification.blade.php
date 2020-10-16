@@ -11,9 +11,6 @@
 </li>
 @endsection
 @section('nav_bar_right')
-<li class="nav-item mr-5">
-    <a class="btn btn-light" href="#" role="button">Check out</a>
-</li>
 <li class="nav-item active mr-5">
     <a href="{{route('verification')}}" class="nav-link" href="#">Verification</a>
 </li>
