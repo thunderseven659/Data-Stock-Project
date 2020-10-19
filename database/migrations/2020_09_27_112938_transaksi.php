@@ -22,6 +22,7 @@ class Transaksi extends Migration
             $table->string('resi_id')->nullable();
             $table->foreign('resi_id')->references('resi_id')->on('resi')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
+            $table->string('status');
         });
     }
 

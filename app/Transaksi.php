@@ -14,7 +14,8 @@ class Transaksi extends Model
          $x= Transaksi::create([
             'date'=>$date,
             'nama_penerima'=>$nama_penerima,
-            'username'=>$username
+            'username'=>$username,
+            'status'=>'belum selesai'
         ]);
             return $x;
     }

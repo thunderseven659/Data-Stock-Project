@@ -17,6 +17,21 @@ class Controller_read extends Controller
     function insertTransaction(Request $request)
     {
 
+        $rule = [
+
+            'nama_penerima'=> 'required',
+
+        ];
+        $attribute = [
+            'id'=>'Id',
+            'nama_penerima'=>'Nama_penerima',
+            'stock'=>'Stock'
+        ];
+        $message = [
+            'required'=> ':attribute is required'
+
+        ];
+        $this->validate($request,$rule,$message,$attribute);
         $x= Transaksi::InsertTransaction(date("Y-m-d"),Auth::user()->username,$request->nama_penerima);
 
         for($i=0;$i<count($request->id);$i++)
