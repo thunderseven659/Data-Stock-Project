@@ -63,7 +63,7 @@
                                     </tr>
                                 @endforeach
                             </tbody>
-                        </table>>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -129,10 +129,6 @@
             table_right = $('#tableRight').DataTable();
 
         });
-
-
-
-
         function addRow(id, name, description, price) {
             let z = x.length;
             x.push(id);
@@ -159,19 +155,7 @@
             }
         }
 
-
-
-
-
         function deleteRow(r) {
-
-            // var index = x.indexOf(id);
-            // if (index >= 0) {
-            //     x.splice(index, 1);
-            // }
-            // var i = r.parentNode.parentNode.rowIndex;
-            // document.getElementById("tableRight").deleteRow(i);
-           // console.log(row(r.).data);
                 table_right.row(r.parentNode.parentNode).remove().draw();
                 x.pop();
         }
