@@ -19,6 +19,16 @@
 @endsection
 @section('body')
     <div class="container-fluid">
+        @if (Session::has('success'))
+        <div class="alert alert-success">
+            {{ Session::get('success') }}
+        </div>
+    @endif
+    @if (Session::has('error'))
+        <div class="alert alert-danger">
+            {{ Session::get('error') }}
+        </div>
+    @endif
         <div class="row d-flex justify-content-center align-items-center" style="height: 90vh">
             <div class="col-xl-4" id="table1">
                 <div class="card bg-light" style="width: 40rem">
@@ -48,10 +58,14 @@
                                         <td>{{ $item->stock }}</td>
                                         <td>
                                             <button id="btn_update"
-                                                onclick="updateRow({{ $item->id }},'{{ $item->name }}','{{ $item->description }}',{{ $item->price }},{{ $item->stock }})">update</button>
+                                                onclick="updateRow({{ $item->id }},'{{ $item->name }}','{{ $item->description }}',{{ $item->price }},{{ $item->stock }},'{{$item->image}}')">update</button>
                                         </td>
                                         <td>
-                                            <button id="btn_delete" onclick="deleteRow({{ $item->id }})">delete</button>
+                                        <form action='{{route('deleteBarang',['id'=>$item->id])}}' id=form_delete method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" id="btn_delete" onclick="return confirm('Are you sure want to delete?')">delete</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -64,12 +78,12 @@
 
             </div>
             <div class="col-xl-4" id="table1">
-                <div class="card bg-light" style="width: 40rem">
+                <div class="card bg-light m-5" style="width: 40rem">
                     <div class="card-body">
-                        <form action={{ route('InsertTransaction') }} id=form_checkout method="post"
+                        <form action='' id="form_update" method="post"
                             enctype="multipart/form-data">
                             @csrf
-
+                            @method('patch')
                             <div id="update">
                                 <div class="form-group">
                                     <label>ID :</label>
@@ -125,6 +139,9 @@
                                 <div class="container-img" id="img_pict">
 
                                 </div>
+                                <div id="image_preview">
+                                    <img id="image1"src="{{ asset('/asset/no_image.png') }}" style="height:10vh;">
+                                </div>
                                 <div class="form-group">
                                     <label>Image :</label>
                                     <input type="file" class="form-control-file  @error('image') is-invalid @enderror"
@@ -151,16 +168,23 @@
 @section('script')
     <script>
         $(document).ready(function() {
-            $('#tableLeft').DataTable();
+            table_left=$('#tableLeft').DataTable();
         });
 
-        function updateRow(id, name, description, price, stock) {
+        function updateRow(id, name, description, price, stock, img) {
+            document.getElementById("form_update").action = "/updateDelete/update/"+id+"/";
             document.getElementById("label_id").innerHTML = id;
             document.getElementById("item_name").value = name;
             document.getElementById("description").value = description;
             document.getElementById("price").value = price;
             document.getElementById("stock").value = stock;
+            document.getElementById("image1").src='/storage/'+img;
         }
-
+        function deleteRow(r)
+        {
+            table_left.row(r.parentNode.parentNode).remove().draw();
+            var id = r.parentNode.parentNode.childNodes[1].innerHTML;
+            //delete by id
+        }
     </script>
 @endsection

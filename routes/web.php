@@ -25,10 +25,12 @@ Route::group(['middleware' => 'loginlogout'], function () {
     Route::get('/logout','Controller_main@logout')->name('Logout');
     Route::get('/','Controller_insert@show')->name('insertData');
     Route::get('/updateDelete','Controller_updateDelete@show')->name('updateDelete');
-     Route::get('/read','Controller_read@show')->name('read');
+    Route::patch('/updateDelete/update/{id}','Controller_updateDelete@updateBarang')->name('updateBarang')->where('id','[0-9]+');
+    Route::delete('/updateDelete/delete/{id}','Controller_updateDelete@deleteBarang')->name('deleteBarang')->where('id','[0-9]+');
+    Route::get('/read','Controller_read@show')->name('read');
     Route::get('/verification','Controller_verification@show')->name('verification');
     Route::post('/read','Controller_read@insertTransaction')->name('InsertTransaction');
-
+    Route::get('/generateCode','Controller_show@showGenerateCode')->name('GenerateCode');
 
 });
 Route::group(['middleware' => 'logoutlogin'], function () {

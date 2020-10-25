@@ -20,7 +20,7 @@ class Barang extends Model
             ]);
         }
         static function getBarang(){
-            return Barang::all(['id','name','description','price','stock']);
+            return Barang::all();
         }
         static function reduceStock($id, $stock){
             $barang= Barang::where('id',$id)->first();
@@ -33,6 +33,9 @@ class Barang extends Model
                 return false;
             }
         }
+        static function findBarang($id){
+            return Barang::where('id',$id)->first();
+        }
         static function checkStock($id, $stock){
             $barang= Barang::where('id',$id)->first();
             if($barang->stock-$stock<0){
@@ -42,5 +45,23 @@ class Barang extends Model
             {
                 return true;
             }
+        }
+        static function deleteBarang($id)
+        {
+            $barang= Barang::where('id',$id)->first();
+            $barang->delete();
+        }
+        static function updateBarang($id,$name, $description, $price, $image, $stock)
+        {
+            $barang=Barang::where('id',$id)->first();
+            $barang->name=$name;
+            $barang->description=$description;
+            $barang->price=$price;
+            $barang->stock=$stock;
+            if($image!=null)
+            {
+                $barang->image=$image;
+            }
+            $barang->save();
         }
 }

@@ -31,7 +31,7 @@
     <div class="container-fluid">
         <div class="row d-flex justify-content-center align-items-center" style="height: 90vh">
 
-            <div class="col-xl-4" id="table1">
+            <div class="col-xl-4 m-5" id="table1">
                 <div class="card bg-light" style="width: 40rem">
                     <h4 class="card-title border-bottom" style="text-align: center">
                         Item list
@@ -76,7 +76,7 @@
                         Checkout List
                     </h4>
                     <div class="card-body">
-                        <form action={{ route('InsertTransaction') }} id=form_checkout method="post"
+                        <form action={{ route('InsertTransaction') }} id="form_checkout" method="post"
                             enctype="multipart/form-data">
                             @csrf
                             <div id="hidden">

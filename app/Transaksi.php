@@ -8,7 +8,7 @@ class Transaksi extends Model
 {
     protected $table='transaksi';
     protected $primarykey='id';
-    protected $fillable=['date','nama_penerima','username','resiId'];
+    protected $fillable=['date','nama_penerima','username','resiId','status'];
 
     static function InsertTransaction($date, $username,$nama_penerima){
          $x= Transaksi::create([
