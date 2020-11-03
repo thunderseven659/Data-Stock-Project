@@ -43,6 +43,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="{{asset('/plugin/Datatable/datatables.js')}}"></script>
     <script src="{{asset('/plugin/code_generator/qrcode.js')}}"></script>
+    <script src="{{asset('/plugin/code_scanner/html5-qrcode.min.js')}}"></script>
     @yield('script')
 </body>
 </html>

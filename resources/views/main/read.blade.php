@@ -32,6 +32,13 @@
         <div class="row d-flex justify-content-center align-items-center" style="height: 90vh">
 
             <div class="col-xl-4 m-5" id="table1">
+                <div class="card" style="width:40rem">
+                    <div class="card-body">
+                        <div id="reader">
+
+                        </div>
+                    </div>
+                </div>
                 <div class="card bg-light" style="width: 40rem">
                     <h4 class="card-title border-bottom" style="text-align: center">
                         Item list
@@ -129,6 +136,7 @@
             table_right = $('#tableRight').DataTable();
 
         });
+
         function addRow(id, name, description, price) {
             let z = x.length;
             x.push(id);
@@ -147,18 +155,49 @@
                     description,
                     price,
                     '<input type="text" class="form-control" name="stock[]">',
-                    '<input type="button" id="#row-'+id+'" value="remove" onclick="deleteRow(this)">'
+                    '<input type="button" id="#row-' + id + '" value="remove" onclick="deleteRow(this)">'
                 ]).draw();
-                 var checkout = '<input name="id[]" type="hidden" value=' + id + '>';
-                 console.log();
+                var checkout = '<input name="id[]" type="hidden" value=' + id + '>';
+                console.log();
                 document.getElementById("hidden").innerHTML += checkout;
             }
         }
 
         function deleteRow(r) {
-                table_right.row(r.parentNode.parentNode).remove().draw();
-                x.pop();
+            table_right.row(r.parentNode.parentNode).remove().draw();
+            x.pop();
         }
+
+        function onScanSuccess(qrMessage) {
+            // handle the scanned code as you like
+            var table_left_data = document.getElementById('tableLeft').children[1] //.children[0].children[0].innerHTML;
+            //console.log(table_left_data)
+            for (var x = 0; x < table_left_data.children.length; x++) {
+
+                if (table_left_data.children[x].children[0].innerHTML == qrMessage) {
+                    var data = table_left_data.children[x];
+                    var id = data.children[0].innerHTML
+                    var name = data.children[1].innerHTML;
+                    var description = data.children[2].innerHTML;
+                    var price = data.children[3].innerHTML;
+                    addRow(id, name, description, price);
+                }
+            }
+            //console.log(table_left_data.children);
+            //console.log(`QR matched = ${qrMessage}`);
+        }
+
+        function onScanFailure(error) {
+            // handle scan failure, usually better to ignore and keep scanning
+            //console.warn(`QR error = ${error}`);
+        }
+
+        let html5QrcodeScanner = new Html5QrcodeScanner(
+            "reader", {
+                fps: 60,
+                qrbox: 250
+            }, /* verbose= */ true);
+        html5QrcodeScanner.render(onScanSuccess, onScanFailure);
 
     </script>
 @endsection
